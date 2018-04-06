@@ -1,0 +1,27 @@
+{% extends "layout.html.twig" %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+	<div class ="row">
+		<div class ="col-lg-4"></div>
+		<div class ="col-lg-4">
+			<ul class="list-group">
+				{% for categorieBateau in categoriesBateaux %}
+					<li class="list-group-item text-light bg-dark">Catégorie {{ categorieBateau }} : {{ classementCategories[categorieBateau] }}</li>
+					{% for modeleBateau in classementsBateauxCategories[categorieBateau]['keys'] %}
+						<li class="list-group-item text-dark bg-light">{{ modeleBateau }} : {{ classementsBateauxCategories[categorieBateau][modeleBateau] }}</li>
+					{% endfor %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }} Kenny</p>
+    </footer>
+{% endblock %}
