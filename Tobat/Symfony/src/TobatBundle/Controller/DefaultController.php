@@ -312,7 +312,10 @@ class DefaultController extends Controller
         $categoriesBateaux = $this->getCategoriesBateaux();
         foreach ($categoriesBateaux as $categorieBateaux) 
         {
-            $classementCategories += [$categorieBateaux['categorie'] => 0];
+            if($categorieBateaux['categorie']!='Aucune')
+            {
+                $classementCategories += [$categorieBateaux['categorie'] => 0];
+            }
         }
 
         $categoriesBateaux = $this->getCategoriesBateaux();
