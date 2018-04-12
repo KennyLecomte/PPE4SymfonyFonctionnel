@@ -2,31 +2,33 @@
 
 {% block body %}
 
-<h1> Visiteur par : </h1>
+<h1> Visiteurs par : </h1>
+<center>
+<div class="col-lg-6">
 <form>
-  <input id="ville" name="CBvalue" type="radio" value="ville">
-  <label for="ville">Ville</label>
-
-  <input id="departement" name="CBvalue" type="radio" value="departement">
-  <label for="departement">Département</label>
+  <div class="radio">
+    <label><input id="ville" name="CBvalue" type="radio" value="ville"> Ville</label>
+  </div>
+  <div class="radio">    
+    <label><input id="departement" name="CBvalue" type="radio" value="departement"> D&eacutepartement</label>
+  </div>
 </form>
+
 
 <div id="form" >
 
   	<div class="ville" style="display:none;">
       <form action="nbVisiteurVille" method="POST">
-      <label for="ville">Ville:</label>
+      <label for="ville">Ville :</label>
       <input type="Text" name='ville'>
       <input type="submit">
       </form>
 
     </div>
 
-
-
     <div class="dep" style="display:none;">
       <form action="nbVisiteurDep" method="POST">
-      <label for="departement">Departement:</label>
+      <label for="departement">D&eacutepartement :</label>
       <select name="departement">
       <option></option>
       {% for departement in departements %}
@@ -40,6 +42,8 @@
 
 
 </div>
+</div>
+</center>
 
 <script type="text/javascript" >
 let CBville = document.querySelector('input[value=ville]')

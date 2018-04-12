@@ -1,10 +1,10 @@
 {% extends "layout.html.twig" %}
 
 {% block body %}
-
-<h1> Nombre de Visiteur pour le départment:{{nomDepartement}} </h1>
-<h1>{{nbVisiteurs[0]['count(*)']}}</h1>
-
+<center>
+<h1> Nombre de Visiteurs pour le département: {{nomDepartement}} </h1>
+<h1 style="">{{nbVisiteurs[0]['count(*)']}}</h1>
+</center>
 {% endblock %}
 
 {% block footer %}
