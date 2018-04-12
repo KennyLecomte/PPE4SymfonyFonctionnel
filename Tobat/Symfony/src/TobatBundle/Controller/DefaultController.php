@@ -22,11 +22,13 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
+        //On regarde si la session est créée, si elle n'est pas créée, on la crée
         if(!$this->get('session')->isStarted())
         {
             $this->creationSession();
         }
 
+        //On regarde si la personne si la personne n'est pas connectée
         if(!$this->verificationConnexion())
         {
             $connexion2 = new Connexion();
@@ -41,7 +43,8 @@ class DefaultController extends Controller
                 if ($connexion2->getLogin() == $connexion->getLogin() && $connexion2->getMotDePasse() == $connexion->getMotDePasse()) {
                     $em = $this->getDoctrine()->getManager();
 
-                     $this->get('session')->set('status', 'connecte');
+                    //On stocke le status connecte dans la variable de session status
+                    $this->get('session')->set('status', 'connecte');
 
                     return $this->render('TobatBundle:Default:index.html.twig');
                 }
@@ -73,35 +76,6 @@ class DefaultController extends Controller
         }
 
         return $connecte;
-    }
-
-    public function testAction()
-    {
-        // Instance de Serializer
-        //$serializer = new Serializer(array(new getSetMethodNormalizer()),array(new XMLEncoder(),new JsonEncoder()));
-        // Instance du manager de Doctrine
-        //$manager = $this->getDoctrine()->getManager();
-        // Récupération du client
-        //$client = $manager->getRepository(Bateau::class)->findAll();
-
-        //return new Response($serializer->serialize($client, 'json'));
-
-        $entityManager = $this->getDoctrine()->getManager();
-
-        /*$enquete = $entityManager->getRepository('TobatBundle:Enquete')->find(1);
-
-        $bateauEnquete=$enquete->getBateaux();
-        foreach ($bateauEnquete as $bateau) 
-        {
-            var_dump($bateau);
-        }*/
-
-        $bateau = $entityManager->getRepository('TobatBundle:Bateau')->find(1);
-        $enqueteBateau = $bateau->getEnquetes();
-        foreach ($enqueteBateau as $enquete) 
-        {
-            var_dump($enquete);
-        }
     }
 
     public function insertEnqueteAction()
@@ -408,7 +382,7 @@ class DefaultController extends Controller
             $query = $entityManager->createQuery(
             'SELECT count(e)
             FROM TobatBundle:Enquete e, TobatBundle:CategorieSociale c
-            WHERE e.budget=c.id AND c.nomCategorie=:categorie'
+            WHERE e.categorieSociale=c.id AND c.nomCategorie=:categorie'
             
             )->setParameter('categorie', $categorieSociale->getNomCategorie());
 

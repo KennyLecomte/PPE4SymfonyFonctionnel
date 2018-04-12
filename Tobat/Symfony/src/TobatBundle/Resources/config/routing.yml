@@ -2,10 +2,6 @@ tobat_homepage:
     path:     /
     defaults: { _controller: TobatBundle:Default:index }
 
-tobat_test:
-    path:     /test
-    defaults: { _controller: TobatBundle:Default:test }
-
 tobat_getBudgetsJSON:
     path:     /getBudgetsJSON
     defaults: { _controller: TobatBundle:Default:getBudgetsJSON }
