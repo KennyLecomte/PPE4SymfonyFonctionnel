@@ -109,19 +109,21 @@ class DefaultController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         $ville = $_POST['ville'];
-         $codePostal = $_POST['codePostal'];
-         $raison = $_POST['raison'];
-         $budget = $_POST['budget'];
-         $trancheAge = $_POST['trancheAge'];
-         $vip = $_POST['vip'];
-         $categorieSociale = $_POST['categorieSociale'];
-         $bateau1Modele = $_POST['bateau1'];
-         $bateau2Modele = $_POST['bateau2'];
-         $bateau3Modele = $_POST['bateau3'];
+        $codePostal = $_POST['codePostal'];
+        $raison = $_POST['raison'];
+        $budget = $_POST['budget'];
+        $trancheAge = $_POST['trancheAge'];
+        $vip = $_POST['vip'];
+        $categorieSociale = $_POST['categorieSociale'];
+        $bateau1Modele = $_POST['bateau1'];
+        $bateau2Modele = $_POST['bateau2'];
+        $bateau3Modele = $_POST['bateau3'];
 
         if(empty($ville) || empty($codePostal) || empty($raison) || empty($budget) || empty($trancheAge) || empty($vip) || empty($categorieSociale)|| empty($bateau1Modele) || empty($bateau2Modele) || empty($bateau3Modele))
         {
-            echo 'Veuillez remplir tous les champs';
+            $reponse = 'Veuillez remplir tous les champs';
+
+            return new Response($reponse);
         }
 
         if($vip=='true')
@@ -195,14 +197,15 @@ class DefaultController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $modele = json_decode($request->getContent(), true)['modele'];
-        $categorie = json_decode($request->getContent(), true)['categorie'];
+        $modele = $_POST['modele'];
+        $categorie = $_POST['categorie'];
 
         if(empty($modele) || empty($categorie))
         {
-            echo 'Veuillez remplir tous les champs';
+            return new Response('Veuillez remplir tous les champs');
         }
-
+        else
+        {
         $bateau = new Bateau();
 
         $bateau->setModele($modele);
@@ -212,6 +215,7 @@ class DefaultController extends Controller
         $entityManager->flush();
 
         return new Response('Bateau bien ajoute');
+        }
     }
 
     public function getBudgetsJSONAction()
